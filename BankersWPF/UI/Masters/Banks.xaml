@@ -1,0 +1,25 @@
+﻿<Window x:Name="wBanks" x:Class="Banks"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mydata="clr-namespace:BankersWPF"
+    Title="Banks" Height="480" Width="750">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="EntityDataProvider" ObjectType="{x:Type mydata:EntityDataProvider }" />
+        <ObjectDataProvider x:Key="Banks" ObjectInstance="{StaticResource EntityDataProvider}" MethodName="GetBanks" />
+    </Window.Resources>
+    <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="1.5" ScaleY="1.5" CenterX="0" CenterY="0" />
+        </Grid.LayoutTransform>
+        <Button x:Name="btnNewBank" Content="New Bank" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="23,21,0,0" Height="30"/>
+        <DataGrid x:Name="dgViewer" HorizontalAlignment="Left" Margin="23,68,0,0" VerticalAlignment="Top" Height="214" Width="458" ItemsSource="{Binding Source={StaticResource Banks}}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Code}" ClipboardContentBinding="{x:Null}" Header="Code" Width="150"/>
+                <DataGridTextColumn Binding="{Binding Path=Name}" ClipboardContentBinding="{x:Null}" Header="Name" Width="300"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnEditBank" Content="Edit Bank" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="156,21,0,0" Height="30"/>
+        <Button x:Name="btnDeleteBank" Content="Delete Bank" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="293,21,0,0" Height="30"/>
+
+    </Grid>
+</Window>

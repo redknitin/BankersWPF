@@ -1,0 +1,14 @@
+﻿<Window x:Class="Masters"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Masters" Height="300" Width="300">
+    <Grid>
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="1.5" ScaleY="1.5" CenterX="0" CenterY="0" />
+        </Grid.LayoutTransform>
+        <Button x:Name="btnBanks" Content="Banks" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="20,19,0,0" Height="33"/>
+        <Button x:Name="btnAccounts" Content="Accounts" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="20,70,0,0" Height="33"/>
+        <Button x:Name="btnChequeBooks" Content="Cheque Books" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="20,123,0,0" Height="33"/>
+
+    </Grid>
+</Window>
