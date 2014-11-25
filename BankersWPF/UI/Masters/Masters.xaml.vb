@@ -10,6 +10,8 @@
     End Sub
 
     Private Sub btnAccounts_Click(sender As Object, e As RoutedEventArgs) Handles btnAccounts.Click
-        MessageBox.Show("Not implemented", "Under Construction", MessageBoxButton.OK, MessageBoxImage.Exclamation)
+        Dim winAccounts As New Accounts
+        winAccounts.ShowDialog()
+        'MessageBox.Show("Not implemented", "Under Construction", MessageBoxButton.OK, MessageBoxImage.Exclamation)
     End Sub
 End Class

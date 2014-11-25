@@ -85,6 +85,9 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\Account.vb">
+      <DependentUpon>BankerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Bank.vb">
       <DependentUpon>BankerModel.tt</DependentUpon>
     </Compile>
@@ -103,16 +106,46 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BankerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Cheque.vb">
+      <DependentUpon>BankerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ChequeBook.vb">
+      <DependentUpon>BankerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\EntityDataProvider.vb" />
     <Compile Include="UI\MainWindow.xaml.vb">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\Masters\Accounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Masters\Account_Edit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Masters\Banks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Masters\Bank_Edit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Masters\ChequeBooks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Masters\ChequeBook_Edit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Masters\Cheques.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Masters\Cheque_Edit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,11 +174,29 @@
     <Import Include="System.Windows.Navigation" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\Masters\Accounts.xaml.vb">
+      <DependentUpon>Accounts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Masters\Account_Edit.xaml.vb">
+      <DependentUpon>Account_Edit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Masters\Banks.xaml.vb">
       <DependentUpon>Banks.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Masters\Bank_Edit.xaml.vb">
       <DependentUpon>Bank_Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Masters\ChequeBooks.xaml.vb">
+      <DependentUpon>ChequeBooks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Masters\ChequeBook_Edit.xaml.vb">
+      <DependentUpon>ChequeBook_Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Masters\Cheques.xaml.vb">
+      <DependentUpon>Cheques.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Masters\Cheque_Edit.xaml.vb">
+      <DependentUpon>Cheque_Edit.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Masters\Masters.xaml.vb">
       <DependentUpon>Masters.xaml</DependentUpon>

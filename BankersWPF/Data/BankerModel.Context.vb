@@ -23,5 +23,8 @@ Partial Public Class bankersEntities
     End Sub
 
     Public Overridable Property Banks() As DbSet(Of Bank)
+    Public Overridable Property Accounts() As DbSet(Of Account)
+    Public Overridable Property ChequeBooks() As DbSet(Of ChequeBook)
+    Public Overridable Property Cheques() As DbSet(Of Cheque)
 
 End Class

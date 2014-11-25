@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bankersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="bankersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="BankCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="Bank">
           <Key>
             <PropertyRef Name="Code" />
@@ -12,11 +20,83 @@
           <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="80" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChequeNo" Type="int" />
+          <Property Name="PartyName" Type="nvarchar" MaxLength="40" />
+          <Property Name="AMOUNT" Type="money" />
+          <Property Name="ChequeBookNo" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ChequeBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChequeBookNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="AccountCode" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="StartChequeNo" Type="int" />
+          <Property Name="EndChequeNo" Type="int" />
+          <Property Name="LastChequeNo" Type="int" />
+          <Property Name="BankCode" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Account__BankCod__239E4DCF">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="BankCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChequeBoo__Accou__267ABA7A">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="ChequeBook" Type="Self.ChequeBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ChequeBook">
+              <PropertyRef Name="AccountCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChequeBoo__BankC__29572725">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+          <End Role="ChequeBook" Type="Self.ChequeBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ChequeBook">
+              <PropertyRef Name="BankCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="bankersModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cheque" EntityType="Self.Cheque" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChequeBook" EntityType="Self.ChequeBook" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account__BankCod__239E4DCF" Association="Self.FK__Account__BankCod__239E4DCF">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChequeBoo__Accou__267ABA7A" Association="Self.FK__ChequeBoo__Accou__267ABA7A">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="ChequeBook" EntitySet="ChequeBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChequeBoo__BankC__29572725" Association="Self.FK__ChequeBoo__BankC__29572725">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="ChequeBook" EntitySet="ChequeBook" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bankersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -26,10 +106,97 @@
           </Key>
           <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="bankersModel.FK__Account__BankCod__239E4DCF" FromRole="Bank" ToRole="Account" />
+          <NavigationProperty Name="ChequeBooks" Relationship="bankersModel.FK__ChequeBoo__BankC__29572725" FromRole="Bank" ToRole="ChequeBook" />
         </EntityType>
         <EntityContainer Name="bankersEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Banks" EntityType="Self.Bank" />
+          <EntitySet Name="Accounts" EntityType="bankersModel.Account" />
+          <EntitySet Name="ChequeBooks" EntityType="bankersModel.ChequeBook" />
+          <AssociationSet Name="FK__Account__BankCod__239E4DCF" Association="bankersModel.FK__Account__BankCod__239E4DCF">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChequeBoo__Accou__267ABA7A" Association="bankersModel.FK__ChequeBoo__Accou__267ABA7A">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="ChequeBook" EntitySet="ChequeBooks" />
+          </AssociationSet>
+          <EntitySet Name="Cheques" EntityType="bankersModel.Cheque" />
+          <AssociationSet Name="FK__ChequeBoo__BankC__29572725" Association="bankersModel.FK__ChequeBoo__BankC__29572725">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="ChequeBook" EntitySet="ChequeBooks" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="BankCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bank" Relationship="bankersModel.FK__Account__BankCod__239E4DCF" FromRole="Account" ToRole="Bank" />
+          <NavigationProperty Name="ChequeBooks" Relationship="bankersModel.FK__ChequeBoo__Accou__267ABA7A" FromRole="Account" ToRole="ChequeBook" />
+        </EntityType>
+        <EntityType Name="ChequeBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChequeBookNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AccountCode" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="StartChequeNo" Type="Int32" />
+          <Property Name="EndChequeNo" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="bankersModel.FK__ChequeBoo__Accou__267ABA7A" FromRole="ChequeBook" ToRole="Account" />
+          <Property Name="LastChequeNo" Type="Int32" />
+          <Property Name="BankCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bank" Relationship="bankersModel.FK__ChequeBoo__BankC__29572725" FromRole="ChequeBook" ToRole="Bank" />
+        </EntityType>
+        <Association Name="FK__Account__BankCod__239E4DCF">
+          <End Type="bankersModel.Bank" Role="Bank" Multiplicity="1" />
+          <End Type="bankersModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="BankCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChequeBoo__Accou__267ABA7A">
+          <End Type="bankersModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="bankersModel.ChequeBook" Role="ChequeBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ChequeBook">
+              <PropertyRef Name="AccountCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChequeNo" Type="Int32" />
+          <Property Name="PartyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="AMOUNT" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ChequeBookNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__ChequeBoo__BankC__29572725">
+          <End Type="bankersModel.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="bankersModel.ChequeBook" Role="ChequeBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ChequeBook">
+              <PropertyRef Name="BankCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -41,6 +208,39 @@
               <MappingFragment StoreEntitySet="Bank">
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="bankersModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChequeBooks">
+            <EntityTypeMapping TypeName="bankersModel.ChequeBook">
+              <MappingFragment StoreEntitySet="ChequeBook">
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="LastChequeNo" ColumnName="LastChequeNo" />
+                <ScalarProperty Name="EndChequeNo" ColumnName="EndChequeNo" />
+                <ScalarProperty Name="StartChequeNo" ColumnName="StartChequeNo" />
+                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+                <ScalarProperty Name="ChequeBookNo" ColumnName="ChequeBookNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cheques">
+            <EntityTypeMapping TypeName="bankersModel.Cheque">
+              <MappingFragment StoreEntitySet="Cheque">
+                <ScalarProperty Name="ChequeBookNo" ColumnName="ChequeBookNo" />
+                <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+                <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+                <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

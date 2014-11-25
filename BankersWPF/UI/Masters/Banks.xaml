@@ -12,7 +12,7 @@
             <ScaleTransform ScaleX="1.5" ScaleY="1.5" CenterX="0" CenterY="0" />
         </Grid.LayoutTransform>
         <Button x:Name="btnNewBank" Content="New Bank" HorizontalAlignment="Left" VerticalAlignment="Top" Width="109" Margin="23,21,0,0" Height="30"/>
-        <DataGrid x:Name="dgViewer" HorizontalAlignment="Left" Margin="23,68,0,0" VerticalAlignment="Top" Height="214" Width="458" ItemsSource="{Binding Source={StaticResource Banks}}" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgViewer" HorizontalAlignment="Left" Margin="23,68,0,0" VerticalAlignment="Top" Height="214" Width="458" ItemsSource="{Binding Source={StaticResource Banks}}" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Code}" ClipboardContentBinding="{x:Null}" Header="Code" Width="150"/>
                 <DataGridTextColumn Binding="{Binding Path=Name}" ClipboardContentBinding="{x:Null}" Header="Name" Width="300"/>

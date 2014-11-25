@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mydata="clr-namespace:BankersWPF"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
-    Title="Bank_Edit" Height="276.316" Width="610">
+    Title="Bank_Edit" Height="275" Width="610">
     <!--<Window.Resources>
         <ObjectDataProvider x:Key="DataProvider" ObjectType="{x:Type mydata:EntityDataProvider}" />
         <ObjectDataProvider x:Key="BankModel" MethodName="GetBank">

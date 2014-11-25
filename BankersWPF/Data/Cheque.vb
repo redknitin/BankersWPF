@@ -10,11 +10,11 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class Bank
-    Public Property Code As String
-    Public Property Name As String
-
-    Public Overridable Property Accounts As ICollection(Of Account) = New HashSet(Of Account)
-    Public Overridable Property ChequeBooks As ICollection(Of ChequeBook) = New HashSet(Of ChequeBook)
+Partial Public Class Cheque
+    Public Property Id As Integer
+    Public Property ChequeNo As Nullable(Of Integer)
+    Public Property PartyName As String
+    Public Property AMOUNT As Nullable(Of Decimal)
+    Public Property ChequeBookNo As String
 
 End Class
