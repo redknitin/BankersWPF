@@ -16,16 +16,19 @@
     End Sub
 
     Public Sub Refresh()
-        Dim tmpSrc = dgViewer.ItemsSource
-        dgViewer.ItemsSource = Nothing
-        dgViewer.ItemsSource = tmpSrc
+        'Dim tmpSrc = dgViewer.ItemsSource
+        'dgViewer.ItemsSource = Nothing
+        'dgViewer.ItemsSource = tmpSrc
 
-        Dim tmpCtx = dgViewer.DataContext
-        dgViewer.DataContext = Nothing
-        dgViewer.DataContext = tmpCtx
+        'Dim tmpCtx = dgViewer.DataContext
+        'dgViewer.DataContext = Nothing
+        'dgViewer.DataContext = tmpCtx
 
         'dgViewer.GetBindingExpression(DataGrid.ItemsSourceProperty).UpdateTarget()
+        'BindingOperations.GetBindingExpressionBase(dgViewer, dgViewer.DataContext).UpdateTarget()
 
-        dgViewer.Items.Refresh()
+        dgViewer.ItemsSource = New EntityDataProvider().GetBanks()
+
+        'dgViewer.Items.Refresh()
     End Sub
 End Class
