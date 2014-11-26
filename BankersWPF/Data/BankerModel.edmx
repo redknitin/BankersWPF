@@ -27,8 +27,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ChequeNo" Type="int" />
           <Property Name="PartyName" Type="nvarchar" MaxLength="40" />
-          <Property Name="AMOUNT" Type="money" />
-          <Property Name="ChequeBookNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="ChequeBookId" Type="int" />
         </EntityType>
         <EntityType Name="ChequeBook">
           <Key>
@@ -40,7 +40,6 @@
           <Property Name="StartChequeNo" Type="int" />
           <Property Name="EndChequeNo" Type="int" />
           <Property Name="LastChequeNo" Type="int" />
-          <Property Name="BankCode" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <Association Name="FK__Account__BankCod__239E4DCF">
           <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
@@ -66,15 +65,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChequeBoo__BankC__29572725">
-          <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
-          <End Role="ChequeBook" Type="Self.ChequeBook" Multiplicity="*" />
+        <Association Name="FK_Cheque_ChequeBook">
+          <End Role="ChequeBook" Type="Self.ChequeBook" Multiplicity="0..1" />
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Bank">
-              <PropertyRef Name="Code" />
+            <Principal Role="ChequeBook">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ChequeBook">
-              <PropertyRef Name="BankCode" />
+            <Dependent Role="Cheque">
+              <PropertyRef Name="ChequeBookId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -91,9 +90,9 @@
             <End Role="Account" EntitySet="Account" />
             <End Role="ChequeBook" EntitySet="ChequeBook" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChequeBoo__BankC__29572725" Association="Self.FK__ChequeBoo__BankC__29572725">
-            <End Role="Bank" EntitySet="Bank" />
+          <AssociationSet Name="FK_Cheque_ChequeBook" Association="Self.FK_Cheque_ChequeBook">
             <End Role="ChequeBook" EntitySet="ChequeBook" />
+            <End Role="Cheque" EntitySet="Cheque" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -107,7 +106,6 @@
           <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="bankersModel.FK__Account__BankCod__239E4DCF" FromRole="Bank" ToRole="Account" />
-          <NavigationProperty Name="ChequeBooks" Relationship="bankersModel.FK__ChequeBoo__BankC__29572725" FromRole="Bank" ToRole="ChequeBook" />
         </EntityType>
         <EntityContainer Name="bankersEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Banks" EntityType="Self.Bank" />
@@ -122,9 +120,9 @@
             <End Role="ChequeBook" EntitySet="ChequeBooks" />
           </AssociationSet>
           <EntitySet Name="Cheques" EntityType="bankersModel.Cheque" />
-          <AssociationSet Name="FK__ChequeBoo__BankC__29572725" Association="bankersModel.FK__ChequeBoo__BankC__29572725">
-            <End Role="Bank" EntitySet="Banks" />
+          <AssociationSet Name="FK_Cheque_ChequeBook" Association="bankersModel.FK_Cheque_ChequeBook">
             <End Role="ChequeBook" EntitySet="ChequeBooks" />
+            <End Role="Cheque" EntitySet="Cheques" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -149,7 +147,7 @@
           <NavigationProperty Name="Account" Relationship="bankersModel.FK__ChequeBoo__Accou__267ABA7A" FromRole="ChequeBook" ToRole="Account" />
           <Property Name="LastChequeNo" Type="Int32" />
           <Property Name="BankCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Bank" Relationship="bankersModel.FK__ChequeBoo__BankC__29572725" FromRole="ChequeBook" ToRole="Bank" />
+          <NavigationProperty Name="Cheques" Relationship="bankersModel.FK_Cheque_ChequeBook" FromRole="ChequeBook" ToRole="Cheque" />
         </EntityType>
         <Association Name="FK__Account__BankCod__239E4DCF">
           <End Type="bankersModel.Bank" Role="Bank" Multiplicity="1" />
@@ -184,16 +182,19 @@
           <Property Name="PartyName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="AMOUNT" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="ChequeBookNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ChequeBookId" Type="Int32" />
+          <NavigationProperty Name="ChequeBook" Relationship="bankersModel.FK_Cheque_ChequeBook" FromRole="Cheque" ToRole="ChequeBook" />
         </EntityType>
-        <Association Name="FK__ChequeBoo__BankC__29572725">
-          <End Type="bankersModel.Bank" Role="Bank" Multiplicity="0..1" />
-          <End Type="bankersModel.ChequeBook" Role="ChequeBook" Multiplicity="*" />
+        <Association Name="FK_Cheque_ChequeBook">
+          <End Type="bankersModel.ChequeBook" Role="ChequeBook" Multiplicity="0..1" />
+          <End Type="bankersModel.Cheque" Role="Cheque" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Bank">
-              <PropertyRef Name="Code" />
+            <Principal Role="ChequeBook">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ChequeBook">
-              <PropertyRef Name="BankCode" />
+            <Dependent Role="Cheque">
+              <PropertyRef Name="ChequeBookId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -223,7 +224,6 @@
           <EntitySetMapping Name="ChequeBooks">
             <EntityTypeMapping TypeName="bankersModel.ChequeBook">
               <MappingFragment StoreEntitySet="ChequeBook">
-                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
                 <ScalarProperty Name="LastChequeNo" ColumnName="LastChequeNo" />
                 <ScalarProperty Name="EndChequeNo" ColumnName="EndChequeNo" />
                 <ScalarProperty Name="StartChequeNo" ColumnName="StartChequeNo" />
@@ -236,8 +236,8 @@
           <EntitySetMapping Name="Cheques">
             <EntityTypeMapping TypeName="bankersModel.Cheque">
               <MappingFragment StoreEntitySet="Cheque">
-                <ScalarProperty Name="ChequeBookNo" ColumnName="ChequeBookNo" />
-                <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+                <ScalarProperty Name="ChequeBookId" ColumnName="ChequeBookId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="PartyName" ColumnName="PartyName" />
                 <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

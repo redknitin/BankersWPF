@@ -15,6 +15,5 @@ Partial Public Class Bank
     Public Property Name As String
 
     Public Overridable Property Accounts As ICollection(Of Account) = New HashSet(Of Account)
-    Public Overridable Property ChequeBooks As ICollection(Of ChequeBook) = New HashSet(Of ChequeBook)
 
 End Class

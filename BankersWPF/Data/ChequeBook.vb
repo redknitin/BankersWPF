@@ -20,6 +20,6 @@ Partial Public Class ChequeBook
     Public Property BankCode As String
 
     Public Overridable Property Account As Account
-    Public Overridable Property Bank As Bank
+    Public Overridable Property Cheques As ICollection(Of Cheque) = New HashSet(Of Cheque)
 
 End Class
