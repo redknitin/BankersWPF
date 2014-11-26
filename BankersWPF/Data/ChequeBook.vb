@@ -17,7 +17,6 @@ Partial Public Class ChequeBook
     Public Property StartChequeNo As Nullable(Of Integer)
     Public Property EndChequeNo As Nullable(Of Integer)
     Public Property LastChequeNo As Nullable(Of Integer)
-    Public Property BankCode As String
 
     Public Overridable Property Account As Account
     Public Overridable Property Cheques As ICollection(Of Cheque) = New HashSet(Of Cheque)

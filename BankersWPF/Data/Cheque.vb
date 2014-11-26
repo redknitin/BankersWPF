@@ -14,8 +14,6 @@ Partial Public Class Cheque
     Public Property Id As Integer
     Public Property ChequeNo As Nullable(Of Integer)
     Public Property PartyName As String
-    Public Property AMOUNT As Nullable(Of Decimal)
-    Public Property ChequeBookNo As String
     Public Property Amount As Nullable(Of Decimal)
     Public Property ChequeBookId As Nullable(Of Integer)
 

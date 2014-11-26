@@ -22,9 +22,9 @@ Partial Public Class bankersEntities
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property Banks() As DbSet(Of Bank)
     Public Overridable Property Accounts() As DbSet(Of Account)
-    Public Overridable Property ChequeBooks() As DbSet(Of ChequeBook)
+    Public Overridable Property Banks() As DbSet(Of Bank)
     Public Overridable Property Cheques() As DbSet(Of Cheque)
+    Public Overridable Property ChequeBooks() As DbSet(Of ChequeBook)
 
 End Class

@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="28c02904c84a4822881054fe7fb72fe6" Name="Diagram1" ZoomLevel="98">
-        <EntityTypeShape EntityType="bankersModel.Bank" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="bankersModel.Account" Width="1.5" PointX="3" PointY="4.375" />
-        <EntityTypeShape EntityType="bankersModel.ChequeBook" Width="1.5" PointX="5.25" PointY="4.25" />
+        <EntityTypeShape EntityType="bankersModel.Account" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="bankersModel.Bank" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="bankersModel.Cheque" Width="1.5" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="bankersModel.ChequeBook" Width="1.5" PointX="5.25" PointY="1" />
         <AssociationConnector Association="bankersModel.FK__Account__BankCod__239E4DCF" />
         <AssociationConnector Association="bankersModel.FK__ChequeBoo__Accou__267ABA7A" />
-        <EntityTypeShape EntityType="bankersModel.Cheque" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="bankersModel.FK_Cheque_ChequeBook" />
       </Diagram>
     </edmx:Diagrams>

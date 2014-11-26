@@ -6,7 +6,9 @@
     End Sub
 
     Private Sub btnChequeBooks_Click(sender As Object, e As RoutedEventArgs) Handles btnChequeBooks.Click
-        MessageBox.Show("Not implemented", "Under Construction", MessageBoxButton.OK, MessageBoxImage.Exclamation)
+        Dim winChqBooks As New ChequeBooks
+        winChqBooks.ShowDialog()
+        'MessageBox.Show("Not implemented", "Under Construction", MessageBoxButton.OK, MessageBoxImage.Exclamation)
     End Sub
 
     Private Sub btnAccounts_Click(sender As Object, e As RoutedEventArgs) Handles btnAccounts.Click

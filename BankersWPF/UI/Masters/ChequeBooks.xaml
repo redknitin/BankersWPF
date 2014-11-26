@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:BankersWPF" x:Class="ChequeBooks"
-    Title="ChequeBooks" Height="480" Width="750">
+    Title="ChequeBooks" Height="638.209" Width="750">
     <Window.Resources>
         <ObjectDataProvider x:Key="EntityDataProvider" ObjectType="{x:Type local:EntityDataProvider}" />
         <ObjectDataProvider x:Key="Banks" ObjectInstance="{StaticResource EntityDataProvider}" MethodName="GetBanks" />
@@ -12,15 +12,33 @@
             <ScaleTransform ScaleX="1.5" ScaleY="1.5" CenterX="0" CenterY="0" />
         </Grid.LayoutTransform>
 
-        <Button x:Name="btnNewChequeBook" Width="109" VerticalAlignment="Top" Margin="23,21,0,0" Height="30" HorizontalAlignment="Left" Content="New Cheque Book"/>
-        <DataGrid x:Name="dgViewer" Width="458" VerticalAlignment="Top" Margin="23,68,0,0" ItemsSource="{Binding Source={StaticResource Banks}}" Height="214" HorizontalAlignment="Left" AutoGenerateColumns="False">
+        <Button x:Name="btnNewChequeBook" Width="109" VerticalAlignment="Top" Margin="19,127,0,0" Height="30" HorizontalAlignment="Left" Content="New Cheque Book"/>
+        <DataGrid x:Name="dgViewer" Width="458" VerticalAlignment="Top" Margin="19,174,0,0" Height="214" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="150" Header="Code" ClipboardContentBinding="{x:Null}" Binding="{Binding Code}"/>
-                <DataGridTextColumn Width="300" Header="Name" ClipboardContentBinding="{x:Null}" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="100" Header="Code" ClipboardContentBinding="{x:Null}" Binding="{Binding ChequeBookNo}"/>
+                <DataGridTextColumn Width="100" Header="Start Chq" ClipboardContentBinding="{x:Null}" Binding="{Binding StartChequeNo}"/>
+                <DataGridTextColumn Width="100" Header="Last Chq" ClipboardContentBinding="{x:Null}" Binding="{Binding LastChequeNo}"/>
+                <DataGridTextColumn Width="100" Header="End Chq" ClipboardContentBinding="{x:Null}" Binding="{Binding EndChequeNo}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnEditChequeBook" Width="109" VerticalAlignment="Top" Margin="156,21,0,0" Height="30" HorizontalAlignment="Left" Content="Edit Cheque Book"/>
-        <Button x:Name="btnDeleteChequeBook" Width="109" VerticalAlignment="Top" Margin="293,21,0,0" Height="30" HorizontalAlignment="Left" Content="Delete Cheque Book"/>
+        <Button x:Name="btnEditChequeBook" Width="109" VerticalAlignment="Top" Margin="152,127,0,0" Height="30" HorizontalAlignment="Left" Content="Edit Cheque Book"/>
+        <Button x:Name="btnDeleteChequeBook" Width="109" VerticalAlignment="Top" Margin="289,127,0,0" Height="30" HorizontalAlignment="Left" Content="Delete Cheque Book"/>
+        <Label Content="Select Bank" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,14,0,0"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="286" Margin="111,18,0,0" ItemsSource="{Binding Source={StaticResource Banks}}" SelectedValuePath="{Binding Code}" SelectionChanged="cboBank_SelectionChanged" x:Name="cboBank">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Content="Select Account" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,59,0,0"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="286" Margin="111,63,0,0" SelectedValuePath="{Binding Code}" SelectionChanged="cboAccount_SelectionChanged" x:Name="cboAccount">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
     </Grid>
 </Window>
