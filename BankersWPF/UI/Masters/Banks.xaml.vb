@@ -25,8 +25,8 @@
                 Using db As New bankersEntities
                     db.Banks.Remove(db.Banks.Single(Function(x) x.Code = DirectCast(selBank, Bank).Code))
                     db.SaveChanges()
-                    dgViewer.ItemsSource = New EntityDataProvider().GetBanks()
                 End Using
+                Refresh()
             End If
         End If
     End Sub

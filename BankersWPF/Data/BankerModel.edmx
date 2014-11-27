@@ -151,7 +151,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChequeBookNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="AccountCode" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="StartChequeNo" Type="Int32" />
           <Property Name="EndChequeNo" Type="Int32" />
@@ -236,7 +235,6 @@
                 <ScalarProperty Name="EndChequeNo" ColumnName="EndChequeNo" />
                 <ScalarProperty Name="StartChequeNo" ColumnName="StartChequeNo" />
                 <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
-                <ScalarProperty Name="ChequeBookNo" ColumnName="ChequeBookNo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

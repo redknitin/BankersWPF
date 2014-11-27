@@ -1,8 +1,19 @@
 ﻿<Window x:Class="ChequeBook_Edit"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="ChequeBook_Edit" Height="300" Width="300">
+    Title="ChequeBook_Edit" Height="275" Width="610">
     <Grid>
-        
+        <Grid.LayoutTransform>
+            <ScaleTransform ScaleX="1.5" ScaleY="1.5" CenterX="0" CenterY="0" />
+        </Grid.LayoutTransform>
+        <Label Content="Start Cheque No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <TextBox x:Name="txtStartChqNo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="153,13,0,0" Text="{Binding ChequeBook.StartChequeNo, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" />
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="106,142,0,0" Height="34"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="198,142,0,0" Height="34"/>
+        <Label Content="End Cheque No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,49,0,0"/>
+        <TextBox x:Name="txtEndChqNo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="153,52,0,0" Text="{Binding ChequeBook.EndChequeNo, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" />
+        <Label Content="Last Used Cheque No" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,91,0,0"/>
+        <TextBox x:Name="txtLastChqNo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="153,94,0,0" Text="{Binding ChequeBook.LastChequeNo, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" />
+
     </Grid>
 </Window>

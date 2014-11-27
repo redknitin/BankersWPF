@@ -12,7 +12,6 @@ Imports System.Collections.Generic
 
 Partial Public Class ChequeBook
     Public Property Id As Integer
-    Public Property ChequeBookNo As String
     Public Property AccountCode As String
     Public Property StartChequeNo As Nullable(Of Integer)
     Public Property EndChequeNo As Nullable(Of Integer)

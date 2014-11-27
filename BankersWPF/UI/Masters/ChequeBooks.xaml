@@ -15,10 +15,10 @@
         <Button x:Name="btnNewChequeBook" Width="109" VerticalAlignment="Top" Margin="19,127,0,0" Height="30" HorizontalAlignment="Left" Content="New Cheque Book"/>
         <DataGrid x:Name="dgViewer" Width="458" VerticalAlignment="Top" Margin="19,174,0,0" Height="214" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="100" Header="Code" ClipboardContentBinding="{x:Null}" Binding="{Binding ChequeBookNo}"/>
+                <DataGridTextColumn Width="100" Header="ID" ClipboardContentBinding="{x:Null}" Binding="{Binding Id}"/>
                 <DataGridTextColumn Width="100" Header="Start Chq" ClipboardContentBinding="{x:Null}" Binding="{Binding StartChequeNo}"/>
-                <DataGridTextColumn Width="100" Header="Last Chq" ClipboardContentBinding="{x:Null}" Binding="{Binding LastChequeNo}"/>
                 <DataGridTextColumn Width="100" Header="End Chq" ClipboardContentBinding="{x:Null}" Binding="{Binding EndChequeNo}"/>
+                <DataGridTextColumn Width="100" Header="Last Chq" ClipboardContentBinding="{x:Null}" Binding="{Binding LastChequeNo}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnEditChequeBook" Width="109" VerticalAlignment="Top" Margin="152,127,0,0" Height="30" HorizontalAlignment="Left" Content="Edit Cheque Book"/>

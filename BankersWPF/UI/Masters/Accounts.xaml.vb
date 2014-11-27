@@ -46,9 +46,8 @@
                 Using db As New bankersEntities
                     db.Accounts.Remove(db.Accounts.Single(Function(a) a.Code = DirectCast(selAccount, Account).Code))
                     db.SaveChanges()
-                    Dim bankCode As String = DirectCast(cboBank.SelectedItem, Bank).Code
-                    dgViewer.ItemsSource = New EntityDataProvider().GetAccounts(bankCode)
                 End Using
+                Refresh()
             End If
         End If
     End Sub
