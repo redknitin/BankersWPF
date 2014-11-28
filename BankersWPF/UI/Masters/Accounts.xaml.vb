@@ -1,5 +1,4 @@
 ﻿Public Class Accounts
-
     Private Sub cboBank_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
         If cboBank.SelectedItem Is Nothing Then
             Return

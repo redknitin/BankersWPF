@@ -10,13 +10,14 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class Account
-    Public Property Code As String
-    Public Property Name As String
-    Public Property BankCode As String
+Partial Public Class Journal
+    Public Property Id As Integer
+    Public Property AccountCode As String
+    Public Property Amount As Decimal
+    Public Property OccurredOn As Date
+    Public Property Comment As String
+    Public Property EntryType As String
 
-    Public Overridable Property Bank As Bank
-    Public Overridable Property ChequeBooks As ICollection(Of ChequeBook) = New HashSet(Of ChequeBook)
-    Public Overridable Property Journals As ICollection(Of Journal) = New HashSet(Of Journal)
+    Public Overridable Property Account As Account
 
 End Class

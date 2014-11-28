@@ -35,11 +35,21 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ChequeBookNo" Type="nvarchar" MaxLength="20" />
           <Property Name="AccountCode" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="StartChequeNo" Type="int" />
           <Property Name="EndChequeNo" Type="int" />
           <Property Name="LastChequeNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountCode" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="OccurredOn" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" />
+          <Property Name="EntryType" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <Association Name="FK__Account__BankCod__239E4DCF">
           <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
@@ -77,11 +87,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Journal_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="AccountCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="bankersModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cheque" EntityType="Self.Cheque" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChequeBook" EntityType="Self.ChequeBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Journal" EntityType="Self.Journal" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Account__BankCod__239E4DCF" Association="Self.FK__Account__BankCod__239E4DCF">
             <End Role="Bank" EntitySet="Bank" />
             <End Role="Account" EntitySet="Account" />
@@ -93,6 +116,10 @@
           <AssociationSet Name="FK_Cheque_ChequeBook" Association="Self.FK_Cheque_ChequeBook">
             <End Role="ChequeBook" EntitySet="ChequeBook" />
             <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Journal_Account" Association="Self.FK_Journal_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Journal" EntitySet="Journal" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -116,6 +143,11 @@
             <End Role="ChequeBook" EntitySet="ChequeBooks" />
             <End Role="Cheque" EntitySet="Cheques" />
           </AssociationSet>
+          <EntitySet Name="Journals" EntityType="bankersModel.Journal" />
+          <AssociationSet Name="FK_Journal_Account" Association="bankersModel.FK_Journal_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Journal" EntitySet="Journals" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -126,6 +158,7 @@
           <Property Name="BankCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bank" Relationship="bankersModel.FK__Account__BankCod__239E4DCF" FromRole="Account" ToRole="Bank" />
           <NavigationProperty Name="ChequeBooks" Relationship="bankersModel.FK__ChequeBoo__Accou__267ABA7A" FromRole="Account" ToRole="ChequeBook" />
+          <NavigationProperty Name="Journals" Relationship="bankersModel.FK_Journal_Account" FromRole="Account" ToRole="Journal" />
         </EntityType>
         <EntityType Name="Bank">
           <Key>
@@ -194,6 +227,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Journal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountCode" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="OccurredOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EntryType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="bankersModel.FK_Journal_Account" FromRole="Journal" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK_Journal_Account">
+          <End Type="bankersModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="bankersModel.Journal" Role="Journal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Journal">
+              <PropertyRef Name="AccountCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -234,6 +291,18 @@
                 <ScalarProperty Name="LastChequeNo" ColumnName="LastChequeNo" />
                 <ScalarProperty Name="EndChequeNo" ColumnName="EndChequeNo" />
                 <ScalarProperty Name="StartChequeNo" ColumnName="StartChequeNo" />
+                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Journals">
+            <EntityTypeMapping TypeName="bankersModel.Journal">
+              <MappingFragment StoreEntitySet="Journal">
+                <ScalarProperty Name="EntryType" ColumnName="EntryType" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="OccurredOn" ColumnName="OccurredOn" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

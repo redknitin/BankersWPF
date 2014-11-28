@@ -77,6 +77,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Journal.vb">
+      <DependentUpon>BankerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Transactions\Transactions.xaml.vb">
+      <DependentUpon>Transactions.xaml</DependentUpon>
+    </Compile>
     <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -141,15 +147,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Masters\Cheques.xaml">
+    <Page Include="Primer\Cheques.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Masters\Cheque_Edit.xaml">
+    <Page Include="Primer\Cheque_Edit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Masters\Masters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Transactions\Transactions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,10 +202,10 @@
     <Compile Include="UI\Masters\ChequeBook_Edit.xaml.vb">
       <DependentUpon>ChequeBook_Edit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Masters\Cheques.xaml.vb">
+    <Compile Include="Primer\Cheques.xaml.vb">
       <DependentUpon>Cheques.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Masters\Cheque_Edit.xaml.vb">
+    <Compile Include="Primer\Cheque_Edit.xaml.vb">
       <DependentUpon>Cheque_Edit.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Masters\Masters.xaml.vb">
@@ -252,7 +262,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\Reports\" />
-    <Folder Include="UI\Transactions\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
