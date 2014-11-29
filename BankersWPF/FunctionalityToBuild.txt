@@ -1,0 +1,9 @@
+﻿Interest calculation and posting
+
+Entering the Occurred On date for opening balance
+
+Printing cheques
+
+Post dated cheque alert
+
+Bank reconciliation

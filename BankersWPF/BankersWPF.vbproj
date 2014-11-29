@@ -83,6 +83,9 @@
     <Compile Include="UI\Transactions\Transactions.xaml.vb">
       <DependentUpon>Transactions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Transactions\Transaction_Edit.xaml.vb">
+      <DependentUpon>Transaction_Edit.xaml</DependentUpon>
+    </Compile>
     <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -160,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Transactions\Transactions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Transactions\Transaction_Edit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -265,6 +272,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FunctionalityToBuild.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

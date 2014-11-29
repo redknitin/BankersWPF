@@ -1,8 +1,36 @@
-﻿<Window x:Class="Transactions"
+﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Transactions" Height="300" Width="300">
+    xmlns:local="clr-namespace:BankersWPF" x:Class="Transactions"
+    Title="Transactions" Height="541.353" Width="602.256">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="EntityDataProvider" ObjectType="{x:Type local:EntityDataProvider}" />
+        <ObjectDataProvider x:Key="Banks" ObjectInstance="{StaticResource EntityDataProvider}" MethodName="GetBanks" />
+    </Window.Resources>
     <Grid>
-        
+
+        <Label VerticalAlignment="Top" Margin="18,14,0,0" HorizontalAlignment="Left" Content="Select Bank"/>
+        <ComboBox x:Name="cboBank" Width="286" VerticalAlignment="Top" SelectionChanged="cboBank_SelectionChanged" SelectedValuePath="{Binding Code}" Margin="111,18,-105,0" ItemsSource="{Binding Source={StaticResource Banks}}" HorizontalAlignment="Left">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label VerticalAlignment="Top" Margin="18,59,0,0" HorizontalAlignment="Left" Content="Select Account"/>
+        <ComboBox x:Name="cboAccount" Width="286" VerticalAlignment="Top" SelectionChanged="cboAccount_SelectionChanged" SelectedValuePath="{Binding Code}" Margin="111,63,-105,0" HorizontalAlignment="Left">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button x:Name="btnNewTransaction" Width="109" VerticalAlignment="Top" Margin="19,127,0,0" Height="30" HorizontalAlignment="Left" Content="New Transaction"/>
+        <Button x:Name="btnEditTransaction" Width="109" VerticalAlignment="Top" Margin="152,127,0,0" Height="30" HorizontalAlignment="Left" Content="Edit Transaction"/>
+        <Button x:Name="btnDeleteTransaction" Width="109" VerticalAlignment="Top" Margin="289,127,0,0" Height="30" HorizontalAlignment="Left" Content="Delete Transaction"/>
+        <Button x:Name="btnIssueCheque" Width="109" VerticalAlignment="Top" Margin="475,14,0,0" Height="30" HorizontalAlignment="Left" Content="Issue Cheque"/>
+        <Button x:Name="btnCancelCheque" Width="109" VerticalAlignment="Top" Margin="475,57,0,0" Height="30" HorizontalAlignment="Left" Content="Cancel Cheque"/>
+        <DataGrid x:Name="dgViewer" HorizontalAlignment="Left" Margin="19,177,0,0" VerticalAlignment="Top" Height="214" Width="458" AutoGenerateColumns="True" CanUserAddRows="False">
+        </DataGrid>
     </Grid>
 </Window>

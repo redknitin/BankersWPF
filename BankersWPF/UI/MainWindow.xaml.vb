@@ -1,7 +1,8 @@
 ﻿Class MainWindow 
 
     Private Sub btnTransactions_Click(sender As Object, e As RoutedEventArgs) Handles btnTransactions.Click
-        MessageBox.Show("Not implemented", "Under Construction", MessageBoxButton.OK, MessageBoxImage.Exclamation)
+        Dim winTrans As New Transactions
+        winTrans.ShowDialog()
     End Sub
 
     Private Sub btnMasters_Click(sender As Object, e As RoutedEventArgs) Handles btnMasters.Click
