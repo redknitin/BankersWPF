@@ -18,4 +18,8 @@
             dgViewer.ItemsSource = retval
         End Using
     End Sub
+
+    Private Sub btnEditTransaction_Click(sender As Object, e As RoutedEventArgs) Handles btnEditTransaction.Click
+
+    End Sub
 End Class

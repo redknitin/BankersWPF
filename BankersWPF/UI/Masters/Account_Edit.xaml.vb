@@ -33,10 +33,10 @@
         Using db As New bankersEntities
             db.Accounts.Attach(Account)
             db.Entry(Account).State = IIf(mMode = "Edit", System.Data.Entity.EntityState.Modified, System.Data.Entity.EntityState.Added)
-            If mMode = "New" And Not String.IsNullOrWhiteSpace(txtOpening.Text) Then
+            If mMode = "New" Then
                 Dim j As New Journal
                 j.AccountCode = Account.Code
-                j.Amount = Decimal.Parse(txtOpening.Text)
+                If Not String.IsNullOrWhiteSpace(txtOpening.Text) Then j.Amount = Decimal.Parse(txtOpening.Text) Else j.Amount = 0
                 j.EntryType = "Opening"
                 j.Comment = "Opening balance"
                 j.OccurredOn = DateTime.Now
