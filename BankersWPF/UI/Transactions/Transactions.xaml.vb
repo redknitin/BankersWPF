@@ -20,6 +20,27 @@
     End Sub
 
     Private Sub btnEditTransaction_Click(sender As Object, e As RoutedEventArgs) Handles btnEditTransaction.Click
+        Dim transactionId As Int32 = DirectCast(dgViewer.SelectedItem, Journal).Id
+        Dim winTrEdit As New Transaction_Edit(transactionId)
+        winTrEdit.ShowDialog()
+    End Sub
 
+    Private Sub btnNewTransaction_Click(sender As Object, e As RoutedEventArgs) Handles btnNewTransaction.Click
+        Dim accountCode As String = DirectCast(cboAccount.SelectedItem, Account).Code
+        Dim winTrEdit As New Transaction_Edit(Nothing, accountCode)
+        winTrEdit.ShowDialog()
+    End Sub
+
+    Private Sub btnDeleteTransaction_Click(sender As Object, e As RoutedEventArgs) Handles btnDeleteTransaction.Click
+        If MessageBoxResult.Yes = MessageBox.Show("Are you sure you want to delete?", "Confirm deletion", MessageBoxButton.YesNo, MessageBoxImage.Question) Then
+            Dim selTransaction = dgViewer.SelectedItem
+            If Not selTransaction Is Nothing Then
+                Using db As New bankersEntities
+                    db.Journals.Remove(db.Journals.Single(Function(a) a.Id = DirectCast(selTransaction, Journal).Id))
+                    db.SaveChanges()
+                End Using
+                'Refresh()
+            End If
+        End If
     End Sub
 End Class

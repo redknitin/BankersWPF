@@ -23,6 +23,7 @@
 
     Private Sub btnSave_Click(sender As Object, e As RoutedEventArgs) Handles btnSave.Click
         Using db As New bankersEntities
+            Journal.OccurredOn = dtOccurredOn.SelectedDate
             db.Journals.Attach(Journal)
             db.Entry(Journal).State = IIf(mMode = "Edit", System.Data.Entity.EntityState.Modified, System.Data.Entity.EntityState.Added)
             db.SaveChanges()
